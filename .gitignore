@@ -1,0 +1,8 @@
+# ignore resource file currently 
+*.png
+*.jpeg
+*.bmp
+bin/
+build/
+resource/
+.vscode/
