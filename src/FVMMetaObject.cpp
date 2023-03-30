@@ -1,8 +1,15 @@
 #include "include/core/FVMMetaObject.h"
 #include "include/Ui/Object/FVMGameObject.h"
 #include "include/core/Game/Object/FVMObject.h"
-#define MAS(...) FVMcore::__FVMAbstructMouseObject::Animation_State {__VA_ARGS__} \
 
+/*! @brief MAS define different states for mouse 
+    Those states are :
+    
+*/
+#define MAS(...) FVMcore::__FVMAbstructMouseObject::Animation_State {__VA_ARGS__}
+#define FOOD_ADDRESS(FoodName, statrum) "../resource/Food"#FoodName"/"#statrum"/"
+#define FOOD_CARD_ADDRESS 
+#define FVM_META_FOOD_OBJECT(name, resCount, behaveStartPos, bulletCount, hitStartPos) 
 
 int FVMcore::_meta::FVMMetaPool::objRefCount = 0;
 FVMcore::_meta::FVMMetaPool * FVMcore::_meta::FVMMetaPool::m_metaObject = nullptr;
@@ -48,11 +55,8 @@ bool FVMcore::_meta::FVMMetaPool::LoadGlobalFVMFoodObject()
 {
     // Load all Object from file once a 6
     qDebug() << "Load game card resource...";
-    m_resUnit[9] = new FVMcore::FoodObject(9, 27, 14, "../resource/Food/paipaiRooster/0/", 4, "../resource/Food/paipaiRooster/0/bullet", -70, -90, "../resource/Food/paipaiRooster/0/card.png", 2);
-    m_resUnit[9]->setEmitPolicy(new FVMcore::policy::PaiPaiRooster());
-
-    m_resUnit[0] = new FVMcore::FoodObject(0, 23, 13, "../resource/Food/corn/0/", 4, "../resource/Food/corn/0/bullet/", -60, -90, "../resource/Food/corn/0/card.png", 2);
-    m_resUnit[0]->setEmitPolicy(new FVMcore::policy::uncleCorn());
+    m_resUnit[9] = new FVMcore::FoodObject(new FVMcore::policy::PaiPaiRooster, 9, 27, 14, "../resource/Food/paipaiRooster/0/", 4, "../resource/Food/paipaiRooster/0/bullet", -70, -90, "../resource/Food/paipaiRooster/0/card.png", 2);
+    m_resUnit[0] = new FVMcore::FoodObject(new FVMcore::policy::uncleCorn, 0, 23, 13, "../resource/Food/corn/0/", 4, "../resource/Food/corn/0/bullet/", -60, -90, "../resource/Food/corn/0/card.png", 2);
     qDebug() << "load game card done";
     return true;
 }

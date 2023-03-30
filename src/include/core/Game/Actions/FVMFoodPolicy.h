@@ -14,6 +14,9 @@ namespace FVMcore {class FVMAbstructCardManager; }
 namespace FVMcore::battle {class FVMBattleSceneManager; }
 namespace FVMcore::policy {
     
+
+    // TODO Emit() outght to create debuff groups for the bullet, which would be attached to the foe. 
+    
     /// @brief  Template functions for all food object while in battle-field 
     ///
     /*!

@@ -13,7 +13,7 @@ const QRegion FVMcore::policy::PaiPaiRooster::AttackRange(scene_core::FVMPlainGa
 }
 
 void FVMcore::policy::PaiPaiRooster::Emit(scene_core::FoodObjectView * Obj_V) {
-    
+    // TODO create bullet for PaiPaiRooster    
 }
 
 FVMctrl_core::FVMFoodCard * FVMcore::policy::FoodAbstructPolicy::createFoodCard(FVMAbstructCardManager * manager, const int & level, const int& stratum, const bool & tied, const char * cardResAddr, const int& id) {
@@ -42,4 +42,8 @@ const QRegion FVMcore::policy::uncleCorn::AttackRange(scene_core::FVMPlainGameMa
     int __y  = (y == 0) ? 0 : ((map[y - 1][x]).relativePosY);
     int __x  =  (map[y][x]).relativePosX;
     return QRect(__x + map.getAbsPos().x(), __y + map.getAbsPos().y() + 30, 3000, 5);   
+}
+
+void FVMcore::policy::uncleCorn::Emit(scene_core::FoodObjectView * Obj_V) {
+    
 }

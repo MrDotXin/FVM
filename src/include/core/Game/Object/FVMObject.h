@@ -22,68 +22,83 @@ namespace FVMcore {
             ~__FVMAbstructObject() = default; 
 
             [[nodiscard]] inline const _hash_value& getId() const {return id; }
-            
-            virtual QGraphicsItem * createObject(battle::FVMBattleSceneManager * scene, 
-                    const int scene_x,    
-                    const int scene_y,     
-                    const int x,           
-                    const int y,
-                    const int block_y,
-                    const int block_x
-                    )
-                {return nullptr; }
         private:
             _hash_value id;
-    };
+    }; // class __FVMAbstructObject
 
+    /// @brief FoodObject store resource for the food
+    //! 
+    /*!
+
+    */
     class FoodObject : public __FVMAbstructObject
     { 
 
         public:    
-        private: const int pic_anchor_x; 
-        public:  [[nodiscard]] const int getAnchorX()const; void setAnchorX(const int);
-        private: const int pic_anchor_y; 
-        public:  [[nodiscard]] const int getAnchorY()const; void setAnchorY(const int);
-        private: const int pic_res_counts;    
-        public:  [[nodiscard]] const int getNormalPicCounts()const; void setNormalPicCounts(const int);
-        private: const int bullet_pic_counts;    
-        public:  [[nodiscard]] const int getBulletPicCounts()const; void setBulletPicCounts(const int);
-        private: const int behavior_pic_start_pos;  
-        public:  [[nodiscard]] const int getUniquePicStartPos()const; void setUniquePicStartPos(const int);
-        private: const char * bullet_pic_address; 
-        public: [[nodiscard]] const char *getBulletPicAddress()const; void setBulletPicAddress(const char *);
-        private: const char * food_pic_address; 
-        public: [[nodiscard]] const char *getNormalBehaviourAddress()const; void setNormalBehavioursAddress(const char *);
-        private: const char * food_card_pic_address; 
-        public: [[nodiscard]] const char *getCardAddress() const; void setCardAddress(const char *);
-        private: const int bullet_hit_start_pos;
-        public: [[nodiscard]] const int getBulletHitStartPos() const; void setBulletHitStartPos(const int);
-        private: policy::FoodAbstructPolicy * food_emit;
-        public: [[nodiscard]] policy::FoodAbstructPolicy *getEmitPolicy() const; void setEmitPolicy(policy::FoodAbstructPolicy * p);
+        private: 
+            const int pic_anchor_x; 
+            public:  
+                [[nodiscard]] const int getAnchorX() const; 
+                // void setAnchorX(const int);
+        private: 
+            const int pic_anchor_y; 
+            public:  
+                [[nodiscard]] const int getAnchorY() const; 
+                // void setAnchorY(const int);
+        private: 
+            const int pic_res_counts;    
+            public:  
+                [[nodiscard]] const int getNormalPicCounts() const; 
+                // void setNormalPicCounts(const int);
+        private: 
+            const int bullet_pic_counts;    
+            public:  
+                [[nodiscard]] const int getBulletPicCounts() const; 
+                // void setBulletPicCounts(const int);
+        private: 
+            const int behavior_pic_start_pos;  
+            public:  
+                [[nodiscard]] const int getUniquePicStartPos() const; 
+                // void setUniquePicStartPos(const int);
+        private: 
+            const char * bullet_pic_address; 
+            public: 
+                [[nodiscard]] const char *getBulletPicAddress()const; 
+                // void setBulletPicAddress(const char *);
+        private: 
+            const char * food_pic_address; 
+            public: 
+                [[nodiscard]] const char *getNormalBehaviourAddress()const; 
+                // void setNormalBehavioursAddress(const char *);
+        private: 
+            const char * food_card_pic_address; 
+            public: 
+                [[nodiscard]] const char *getCardAddress() const; 
+                // void setCardAddress(const char *);
+        private: 
+            const int bullet_hit_start_pos;
+            public: 
+                [[nodiscard]] const int getBulletHitStartPos() const; 
+                // void setBulletHitStartPos(const int);
+        private: 
+            policy::FoodAbstructPolicy * food_emit;
+            public: 
+                [[nodiscard]] policy::FoodAbstructPolicy *getEmitPolicy() const; 
+                void setEmitPolicy(policy::FoodAbstructPolicy * p);
         public:
-            FoodObject(int id, 
-                                const int _normal_pic_counts,           // 素材总数
-                                const int _unique_pic_startPos,         // 行动开始的图片位置
-                                const char * _behaviours_address,       // 素材资源地址
-                                const int _bullet_pic_counts,           // 子弹素材总数
-                                const char * _bullet_pic_address,       // 子弹素材地址
-                                const int _Food_origin_archor_x,        // 素材图片偏移x方向
-                                const int _Food_origin_archor_y,        // 素材图片偏移y方向
-                                const char * _card_address,
-                                const int bulletHitStartPos
-                                
+            FoodObject(policy::FoodAbstructPolicy * pcy, const int id, 
+                        const int PicResCounts, const int uniquePicStartPos, const char * behavioursAddress,    
+                        const char * bulletPicAddress, const int bulletPicCounts, const int bulletHitStartPos,   
+                        const int foodOriginAnchorX, const int foodOriginAnchorY,       
+                        const char * cardAddress
                     )
-                :   __FVMAbstructObject(id),
-                    pic_res_counts(_normal_pic_counts), 
-                    behavior_pic_start_pos(_unique_pic_startPos),
-                    food_pic_address(_behaviours_address),
-                    pic_anchor_x(_Food_origin_archor_x),
-                    pic_anchor_y(_Food_origin_archor_y),
-                    bullet_pic_address(_bullet_pic_address),
-                    bullet_pic_counts(_bullet_pic_counts),
-                    food_card_pic_address(_card_address),
-                    bullet_hit_start_pos(bulletHitStartPos)
+                :   __FVMAbstructObject(id), food_emit(pcy), 
+                    pic_res_counts(PicResCounts), behavior_pic_start_pos(uniquePicStartPos), food_pic_address(behavioursAddress),                    
+                    bullet_pic_address(bulletPicAddress), bullet_pic_counts(bulletPicCounts), bullet_hit_start_pos(bulletHitStartPos),
+                    pic_anchor_x(foodOriginAnchorX), pic_anchor_y(foodOriginAnchorY),
+                    food_card_pic_address(cardAddress)
             {};
+
             ~FoodObject() noexcept {if (food_emit != nullptr) delete food_emit; };     
         public :  
             [[nodiscard]] scene_core::FoodObjectView * createFoodObjectView(FVMctrl_core::FVMFoodCard * card, battle::FVMBattleSceneManager * scene, 
@@ -120,88 +135,7 @@ inline policy::FoodAbstructPolicy * FoodObject::getEmitPolicy() const {return th
 
 inline void FoodObject::setEmitPolicy(policy::FoodAbstructPolicy * p) {this->food_emit = p;}
 
-    class MouseObject : public __FVMAbstructObject {
-        public:
-            
-            struct Animation_State {
-                int norm_begin, norm_end, behave_begin, behave_end;
-                bool once;
-                double velocity;  
-                double frequency;        
-                int height;
-                int reachable;
-                double range;
-            };
-        public:
 
-            using FVMMouseState = std::list<Animation_State>; 
-            using pAnimStNode   = std::list<Animation_State>::iterator;            
-            using state_node    = pAnimStNode;
-
-        private:
-            mutable FVMMouseState m_state_group;
-            QRect collideRect;
-        private:
-            const int _mouse_origin_anchor_x;
-            const int _mouse_origin_anchor_y;
-            const char *  _mouse_pic_address;
-            const char * _mouse_tool_address;
-            const int _mouse_pic_counts;
-            const int _mouse_tool_pic_counts;
-
-        public:
-
-            MouseObject(int id,
-                                const int mousePicCounts,
-                                const char * mousePicAddr,
-                                const int mouseAnchorX,
-                                const int mouseAnchorY,
-                                const int mouseToolPicCounts = 0,
-                                const char * mouseToolPicAddr = nullptr
-                        )
-            :  __FVMAbstructObject(id),
-                _mouse_origin_anchor_x(mouseAnchorX),
-                _mouse_origin_anchor_y(mouseAnchorY),
-                _mouse_pic_address(mousePicAddr),
-                _mouse_tool_address(mouseToolPicAddr), 
-                _mouse_pic_counts(mousePicCounts),
-                _mouse_tool_pic_counts(mouseToolPicCounts)
-            {}
-
-            ~MouseObject() noexcept = default;
-
-        public:
-            virtual QGraphicsItem * createObject(
-                        battle::FVMBattleSceneManager * scene, 
-                        const int scene_x,     // 动作区域
-                        const int scene_y,     
-                        const int x,           // 相对位置
-                        const int y,
-                        const int block_y,
-                        const int block_x
-                ); 
-        public:
-            const FVMMouseState * getMouseStateGroups() const {return &m_state_group; }
-            inline pAnimStNode state_begin() const {return m_state_group.begin(); }
-            inline pAnimStNode state_end()   const {return m_state_group.end();   } 
-            inline const char * getNormalBehaviourAddress() const {return _mouse_pic_address; }
-            inline const int getNormalBehaviourPicCounts() const {return _mouse_pic_counts; }  
-            inline const int getAnchorX() const {return _mouse_origin_anchor_x; }
-            inline const int getAnchorY() const {return _mouse_origin_anchor_y; }
-            inline void setCollideRect(QRect rect) { collideRect = rect; }
-            inline const QRect& getCollideRetc() const {return collideRect; }
-        public:
-            void build_state(int phase, Animation_State state_groups, ...) {
-                va_list ap;
-                va_start(ap, state_groups);
-                m_state_group.emplace_back(state_groups);
-                while(--phase > 0) {
-                    state_groups = va_arg(ap, Animation_State);
-                    m_state_group.emplace_back(state_groups);
-                }
-                va_end(ap);
-            } 
-    };
 }
 
 

@@ -16,16 +16,9 @@ namespace scene_core {
             using PFood_Info     = FVMctrl_core::FVMFoodCard *;
             public:
                 FoodObjectView(
-                    FVMctrl_core::FVMFoodCard * card_obj, 
-                    FVMcore::FoodObject * food_obj,
-                    FVMcore::battle::FVMBattleSceneManager * scene, 
-                    FVMcore::policy::FoodAbstructPolicy * launcher,
-                    const int scene_x,  
-                    const int scene_y,     
-                    const int x,             
-                    const int y,
-                    const int block_y,
-                    const int block_x
+                    FVMctrl_core::FVMFoodCard * card_obj, FVMcore::FoodObject * food_obj, FVMcore::battle::FVMBattleSceneManager * scene, FVMcore::policy::FoodAbstructPolicy * launcher,
+                    const int scene_x, const int scene_y, const int x, const int y,
+                    const int block_y, const int block_x
                 );
                 ~FoodObjectView() noexcept = default;
                 virtual void advance(int phase) override;
@@ -45,7 +38,7 @@ namespace scene_core {
                 PFood_Info     m_pFood_info;
                 FVMcore::battle::FVMBattleSceneManager * manager;
                 QRegion        m_attackRange;
-                QRect collideRect;
+                QRect collideRect;              ///< adapter for QuadTree
                 qreal  m_hp;
                 qreal  m_harm;                
         };
