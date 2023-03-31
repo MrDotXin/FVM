@@ -25,7 +25,7 @@ FVMctrl_core::FVMFoodCard * FVMcore::policy::FoodAbstructPolicy::createFoodCard(
 
     @param obj      Provide food resource
     @param card     Provide level     
-    @param policy   Provide diversified data and launcher functions for each food 
+    @param policy   Provide diversified data and "attacking functions" for each food 
     @return An object, may taken charge of by object pool, which is compatible with Q-Style Object  
 */ 
 scene_core::FoodObjectView* FVMcore::policy::FoodAbstructPolicy::createFoodObjectView(FVMcore::FoodObject * obj, FVMctrl_core::FVMFoodCard * card, battle::FVMBattleSceneManager * scene, FoodAbstructPolicy * policy,
@@ -38,12 +38,12 @@ scene_core::FoodObjectView* FVMcore::policy::FoodAbstructPolicy::createFoodObjec
 
 ///////////////////////////////////////////////////////////////////////////////
 // UncleCorn
-const QRegion FVMcore::policy::uncleCorn::AttackRange(scene_core::FVMPlainGameMap & map, const int& x, const int& y) {
+const QRegion FVMcore::policy::UncleCorn::AttackRange(scene_core::FVMPlainGameMap & map, const int& x, const int& y) {
     int __y  = (y == 0) ? 0 : ((map[y - 1][x]).relativePosY);
     int __x  =  (map[y][x]).relativePosX;
     return QRect(__x + map.getAbsPos().x(), __y + map.getAbsPos().y() + 30, 3000, 5);   
 }
 
-void FVMcore::policy::uncleCorn::Emit(scene_core::FoodObjectView * Obj_V) {
+void FVMcore::policy::UncleCorn::Emit(scene_core::FoodObjectView * Obj_V) {
     
 }

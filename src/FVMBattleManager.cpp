@@ -32,17 +32,17 @@ void FVMcore::battle::FVMBattleSceneManager::setUpGameUi()
     // stimulate user info scanning
     qDebug() << "set card select ui";
     do {
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 16);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 15);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 14);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 13);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 12);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 11);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 10);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 9);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 8);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(9)), 7);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(0)), 11);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 16);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 15);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 14);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 13);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 12);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 11);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 10);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 9);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 8);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 7);
+        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(0)), 11);
     } while(false); 
     m_card_demo.setUpUiInScene();
     // 
@@ -50,7 +50,7 @@ void FVMcore::battle::FVMBattleSceneManager::setUpGameUi()
 
 void FVMcore::battle::FVMBattleSceneManager::cardSelected(FVMctrl_core::FVMFoodCard * obj)
 {
-    FoodObject * food_obj = dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFromId(obj->getFoodId()));
+    FoodObject * food_obj = dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(obj->getFoodId()));
     if (m_current_selection == nullptr) {
         QPixmap pixmap(QString(food_obj->getNormalBehaviourAddress()) + "1.png");
         m_current_selection = new QGraphicsPixmapItem(pixmap);
@@ -94,7 +94,7 @@ void FVMcore::battle::FVMBattleSceneManager::mousePressEvent(QMouseEvent *)
         QGraphicsItem * new_food = 
             dynamic_cast<FoodObject *>(
                 _meta::FVMMetaPool::Instance()->
-                    LoadFromId(current_food_info->getFoodId()))->createFoodObjectView(
+                    LoadFoodFromId(current_food_info->getFoodId()))->createFoodObjectView(
                         current_food_info, this,
                         m_map.getAbsPos().x(), m_map.getAbsPos().y(), pos.x(), pos.y(),
                         predicted_optimal_pos.x(), predicted_optimal_pos.y()

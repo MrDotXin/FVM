@@ -2,7 +2,7 @@
 #define FVMBULLETOBJECT_H_
 #include <QtWidgets/QGraphicsItem>
 #include "../Object/FVMGameObject.h"
-#include "../../core/FVMDataStruct.h"
+#include "../../core/FVMQuadTree.h"
 #include "../anim/FVMAnimation.h"
 
 

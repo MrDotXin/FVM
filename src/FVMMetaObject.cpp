@@ -4,12 +4,20 @@
 
 /*! @brief MAS define different states for mouse 
     Those states are :
-    
+        VITAL
 */
-#define MAS(...) FVMcore::__FVMAbstructMouseObject::Animation_State {__VA_ARGS__}
+#define MAS(...) FVMcore::MouseObject::Animation_State {__VA_ARGS__}
 #define FOOD_ADDRESS(FoodName, statrum) "../resource/Food"#FoodName"/"#statrum"/"
-#define FOOD_CARD_ADDRESS 
-#define FVM_META_FOOD_OBJECT(name, resCount, behaveStartPos, bulletCount, hitStartPos) 
+
+#define FOOD_CARD_ADDRESS(FoodName, statrum) "../resource/Food/"#FoodName"/"#statrum"/card.png" 
+
+#define FOOD_BULLET_ADDRESS(FoodName, statrum) "../resource/Food/"#FoodName"/"#statrum"/bullet/"
+
+#define FVM_META_FOOD_OBJECT(name, statrum, id, resCount, behaveStartPos, bulletCount, hitStartPos, anchorX, anchorY) m_resUnit[id] =  new FVMcore::FoodObject( \
+        new FVMcore::policy::name(), id, resCount, behaveStartPos, \
+        FOOD_ADDRESS(name, statrum), FOOD_BULLET_ADDRESS(name, statrum), \
+        bulletCount, hitStartPos, anchorX, anchorY, FOOD_CARD_ADDRESS(name, statrum))       
+
 
 int FVMcore::_meta::FVMMetaPool::objRefCount = 0;
 FVMcore::_meta::FVMMetaPool * FVMcore::_meta::FVMMetaPool::m_metaObject = nullptr;
@@ -25,12 +33,9 @@ FVMcore::_meta::FVMMetaPool::~FVMMetaPool()
     if (m_metaObject != nullptr) {
         
         for (auto& [id, singleton_object] : m_resUnit) {
-            qDebug() << "ID : " << id << " deleted.";
             delete singleton_object;
         }
         FVMcore::_meta::FVMMetaPool * tmp = m_metaObject;
-        m_metaObject = nullptr;
-        delete tmp;
     }
 }
 
@@ -41,7 +46,7 @@ FVMcore::_meta::FVMMetaPool * FVMcore::_meta::FVMMetaPool::Instance() {
     return m_metaObject;
 }
 
-FVMcore::__FVMAbstructObject * FVMcore::_meta::FVMMetaPool::LoadFromId(unsigned int id )
+FVMcore::FoodObject * FVMcore::_meta::FVMMetaPool::LoadFoodFromId(unsigned int id )
 {
     return m_resUnit[id];
 }
@@ -54,10 +59,8 @@ bool FVMcore::_meta::FVMMetaPool::registerFVMObjectInfo()
 bool FVMcore::_meta::FVMMetaPool::LoadGlobalFVMFoodObject()
 {
     // Load all Object from file once a 6
-    qDebug() << "Load game card resource...";
-    m_resUnit[9] = new FVMcore::FoodObject(new FVMcore::policy::PaiPaiRooster, 9, 27, 14, "../resource/Food/paipaiRooster/0/", 4, "../resource/Food/paipaiRooster/0/bullet", -70, -90, "../resource/Food/paipaiRooster/0/card.png", 2);
-    m_resUnit[0] = new FVMcore::FoodObject(new FVMcore::policy::uncleCorn, 0, 23, 13, "../resource/Food/corn/0/", 4, "../resource/Food/corn/0/bullet/", -60, -90, "../resource/Food/corn/0/card.png", 2);
-    qDebug() << "load game card done";
+    FVM_META_FOOD_OBJECT(PaiPaiRooster, 1, 9, 27, 13, 4, 2, -100, -100);
+    FVM_META_FOOD_OBJECT(UncleCorn, 0, 0, 23, 13, 4, 2, -100, -100);
     return true;
 }
 

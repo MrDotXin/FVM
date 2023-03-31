@@ -98,16 +98,16 @@ namespace FVMcore::policy {
             }
    };
 
-   class uncleCorn : public FoodAbstructPolicy {
+   class UncleCorn : public FoodAbstructPolicy {
 
         public:
-            uncleCorn() = default;
-            ~uncleCorn() noexcept = default;
+            UncleCorn() = default;
+            ~UncleCorn() noexcept = default;
 
             using FoodAbstructPolicy::createFoodCard;
 
             virtual const QRegion AttackRange(scene_core::FVMPlainGameMap & mp, const int& x, const int& y) override;
-            virtual void Emit(scene_core::FoodObjectView * ) override {}
+            virtual void Emit(scene_core::FoodObjectView * ) override;
             virtual const qreal velocity(const int& level, qreal ampl = 1) {
                 return ampl * 2.5;
             }

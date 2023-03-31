@@ -1,5 +1,5 @@
 #pragma once
-#include "../FVMDataStruct.h"
+#include "../FVMQuadTree.h"
 #include "Object/FVMObject.h"
 
 namespace FVMcore {

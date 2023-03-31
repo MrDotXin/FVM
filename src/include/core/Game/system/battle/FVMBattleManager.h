@@ -4,7 +4,7 @@
 #include "../../../../Ui/ctrl/FVMBattleCardDemo.h"
 #include "../../../../Ui/FVMGameMap.h"
 #include "../FVMAbstructCardManager.h"
-#include "../../../../core/FVMDataStruct.h"
+#include "../../../../core/FVMQuadTree.h"
 
 class MainWidget;
 namespace FVMctrl_core  {class FVMFoodCard; } 

@@ -87,13 +87,13 @@ namespace FVMcore {
                 void setEmitPolicy(policy::FoodAbstructPolicy * p);
         public:
             FoodObject(policy::FoodAbstructPolicy * pcy, const int id, 
-                        const int PicResCounts, const int uniquePicStartPos, const char * behavioursAddress,    
+                        const int PicResCounts, const int BehavePicStartPos, const char * behavioursAddress,    
                         const char * bulletPicAddress, const int bulletPicCounts, const int bulletHitStartPos,   
                         const int foodOriginAnchorX, const int foodOriginAnchorY,       
                         const char * cardAddress
                     )
                 :   __FVMAbstructObject(id), food_emit(pcy), 
-                    pic_res_counts(PicResCounts), behavior_pic_start_pos(uniquePicStartPos), food_pic_address(behavioursAddress),                    
+                    pic_res_counts(PicResCounts), behavior_pic_start_pos(BehavePicStartPos), food_pic_address(behavioursAddress),                    
                     bullet_pic_address(bulletPicAddress), bullet_pic_counts(bulletPicCounts), bullet_hit_start_pos(bulletHitStartPos),
                     pic_anchor_x(foodOriginAnchorX), pic_anchor_y(foodOriginAnchorY),
                     food_card_pic_address(cardAddress)

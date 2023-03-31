@@ -95,7 +95,7 @@ FVMctrl_core::FVMCardContainerModel::FVMCardContainerModel(FVMCardContainerView 
     m_view = view;
     view->setModel(this);
     for (int i = 0; i < 1; i++) {
-        auto food = dynamic_cast<FVMcore::FoodObject *>(FVMcore::_meta::FVMMetaPool::Instance()->LoadFromId(9));
+        auto food = FVMcore::_meta::FVMMetaPool::Instance()->LoadFoodFromId(9);
         m_card_group.emplace_back(
             new FVMFoodCard(m_view, 9, 10, 0, food->getEmitPolicy()->energy(), food->getCardAddress()));
     }

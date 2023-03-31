@@ -52,7 +52,7 @@ QGraphicsScene * FVMctrl_core::FVMBattleCardDemo::scene() {
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-// class FVMFoodcard
+// class FVMFoodCard
 
 FVMctrl_core::FVMFoodCard::FVMFoodCard(FVMcore::FVMAbstructCardManager * manager, const int id, 
                 const int level, const int stratum, int energy, const char * cardAddr) :
@@ -81,7 +81,6 @@ void FVMctrl_core::FVMFoodCard::paint(QPainter * painter, const QStyleOptionGrap
 
 void FVMctrl_core::FVMFoodCard::mousePressEvent(QGraphicsSceneMouseEvent *event) 
 {   
-    //qDebug() << "pressed !";
     _isSelected = !_isSelected;
 }
 void FVMctrl_core::FVMFoodCard::mouseReleaseEvent(QGraphicsSceneMouseEvent * event) 
@@ -92,7 +91,6 @@ void FVMctrl_core::FVMFoodCard::mouseReleaseEvent(QGraphicsSceneMouseEvent * eve
 }
 void FVMctrl_core::FVMFoodCard::hoverEnterEvent(QGraphicsSceneHoverEvent *event) 
 {
-    //qDebug() << "enter";
     _isLeaved = false;
     setCursor(Qt::PointingHandCursor);
 }
@@ -110,10 +108,6 @@ void FVMctrl_core::FVMFoodCard::addedToScene(QGraphicsScene * scene)
 
 void FVMctrl_core::FVMFoodCard::drawStatus(int status, QPainter * painter)
 {
-    // 0 : in battle field 
-    // 1 : in fore battle field 
-    // 2 : in compose site
-    // 3 : in package(check place)
     if (this->_isSelected == true) {
                 painter->fillRect(
                         QRect(0, 0, m_card.width(), m_card.height()), 
@@ -140,8 +134,3 @@ FVMctrl_core::FVMCard::FVMCard(const char * card)
 {
 }
 
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////
-// _BasicFoodObject

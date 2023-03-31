@@ -1,11 +1,11 @@
-#pragma once
+#if ! defined(FVMQUADTREE_H_)
+#define FVMQUADTREE_H_
 #include <array>
 #include <list>
 #include <queue>
-#include <chrono>
 
 namespace FVMcore::algo {
-        // class QuadTreeNode
+    // class QuadTreeNode
     namespace __Impl {
     	template<class bound_type>
     	constexpr bool checkInteracted(const bound_type& rect, const bound_type& box)
@@ -19,12 +19,14 @@ namespace FVMcore::algo {
     	constexpr bool contain(const bound_type& box, const bound_type& space) 
     	{return (space.x() >= box.x() && space.x() + space.width() <= box.x() + box.width() && space.y() >= box.y() && space.y() + space.height() <= box.y() + box.height());}
 
-    	//////// class QuadTreeNode version 1.0, suit based on c++17 
-		/// @brief first edition of the implementation of quadTree
-    	/// @param __vt :  value_type (heap-allocated)
-        /// @brief : require {value_type::boundingRect()}
-        /// @param __bt :  boundary_type 
-        /// @brief require  {boundary_type::x(); boundary::y(); boundary_type::width(); boundary_type::height();}
+    	/// Class QuadTreeNode version 1.0, suit based on c++17 
+		/*! @brief First edition of the implementation of the quadTree
+
+    	        @param __vt :  value_type (heap-allocated)
+                @brief : require {value_type::boundingRect()}
+                @param __bt :  boundary_type 
+                @brief require  {boundary_type::x(); boundary::y(); boundary_type::width(); boundary_type::height();}
+        */
             template<class __vt, class __bt>
             struct QuadTreeNode {
                 std::array<QuadTreeNode<__vt, __bt> *, 4> children;
@@ -216,13 +218,11 @@ namespace FVMcore::algo {
                         }
                     }
                 }
-                
-              //   void deleteQuadTree(); /*use delete to delete all nodes, only if elements in valist are heap-allocated*/
             };  // class QuadTreeNode
     }
     template<class _value_type, class _bound_type>
     class QuadTree {
-        /// @brief only receive heap-allocated object 
+        /// @warning only receive heap-allocated object 
         public:
             using value_type = _value_type;
             using bound_type = _bound_type;
@@ -258,10 +258,12 @@ namespace FVMcore::algo {
             { return __M_root->itemAtWithPred(std::forward<uninary_oper>(pred), search_rect); }
             template<class uninary_oper>
             inline bool itemListAtWithPred(uninary_oper&& pred, const bound_type& search_ragion) 
-            { return __M_root->itemListAtWithPred(std::forward<uninary_oper>(pred), search_ragion); }
-          //  inline void deleteQuadTree();
+            { return __M_root->itemListAtWithPred(std::forward<uninary_oper>(pred), search_ragion); }   
     };  // class QuadTree
 
 
 }
+
+
+#endif // HEADER FILE
 

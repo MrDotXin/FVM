@@ -18,7 +18,7 @@ namespace FVMcore::_meta {
             FVMMetaPool();
             ~FVMMetaPool();    
             static FVMMetaPool * Instance();
-            __FVMAbstructObject * LoadFromId(unsigned int id); 
+            FoodObject * LoadFoodFromId(unsigned int id); 
         private: 
             bool registerFVMObjectInfo(); 
             bool LoadGlobalFVMFoodObject();
