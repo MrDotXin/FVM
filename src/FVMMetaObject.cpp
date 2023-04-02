@@ -7,7 +7,7 @@
         VITAL
 */
 #define MAS(...) FVMcore::MouseObject::Animation_State {__VA_ARGS__}
-#define FOOD_ADDRESS(FoodName, statrum) "../resource/Food"#FoodName"/"#statrum"/"
+#define FOOD_ADDRESS(FoodName, statrum) "../resource/Food/"#FoodName"/"#statrum"/"
 
 #define FOOD_CARD_ADDRESS(FoodName, statrum) "../resource/Food/"#FoodName"/"#statrum"/card.png" 
 
@@ -59,7 +59,7 @@ bool FVMcore::_meta::FVMMetaPool::registerFVMObjectInfo()
 bool FVMcore::_meta::FVMMetaPool::LoadGlobalFVMFoodObject()
 {
     // Load all Object from file once a 6
-    FVM_META_FOOD_OBJECT(PaiPaiRooster, 1, 9, 27, 13, 4, 2, -100, -100);
+    FVM_META_FOOD_OBJECT(PaiPaiRooster, 1, 9, 27, 13, 4, 2, -70, -90);
     FVM_META_FOOD_OBJECT(UncleCorn, 0, 0, 23, 13, 4, 2, -100, -100);
     return true;
 }

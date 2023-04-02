@@ -66,7 +66,6 @@ namespace scene_core {
         };
 }
 
-
 #endif
 
 

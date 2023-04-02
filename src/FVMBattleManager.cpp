@@ -17,35 +17,23 @@ void FVMcore::battle::FVMBattleSceneManager::setScene(scene_core::_FVMAbstructGa
 
 void FVMcore::battle::FVMBattleSceneManager::createScene()
 {
-        qDebug() << "Manager : Create Scene ";
         if (m_scene != nullptr) {
             
             setUpGameUi();
             m_scene->createScene();
             m_scene->createGameMap(&m_map);
         }
-        qDebug() << "Manager : Done Create Scene ";
 }
 
 void FVMcore::battle::FVMBattleSceneManager::setUpGameUi()
 {
-    // stimulate user info scanning
-    qDebug() << "set card select ui";
+    // stimulate user info scanningm
     do {
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 16);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 15);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 14);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 13);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 12);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 11);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 10);
         m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 9);
         m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 8);
         m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(9)), 7);
-        m_card_demo.addCard(dynamic_cast<FoodObject *>(_meta::FVMMetaPool::Instance()->LoadFoodFromId(0)), 11);
     } while(false); 
     m_card_demo.setUpUiInScene();
-    // 
 }
 
 void FVMcore::battle::FVMBattleSceneManager::cardSelected(FVMctrl_core::FVMFoodCard * obj)
@@ -65,16 +53,7 @@ void FVMcore::battle::FVMBattleSceneManager::cardSelected(FVMctrl_core::FVMFoodC
         _isSelected = true;
 
     } else {
-        /*
-        if (current_food_info->getFoodId() == food_obj->getId()) {
-            if (m_current_selection->isVisible()) {
-                m_current_selection->hide();
-                _isSelected = false;
-            } else {
-                m_current_selection->show();
-                _isSelected = true;
-            }
-        } else */{
+        {
             if (current_food_info != nullptr) current_food_info->setSelected(false);
             QPixmap pixmap(QString(food_obj->getNormalBehaviourAddress()) + "1.png");
             m_current_selection->setPixmap(pixmap);
@@ -129,11 +108,6 @@ inline void FVMcore::battle::FVMBattleSceneManager::deleteScene()
 void FVMcore::battle::FVMBattleSceneManager::drawScene(QPainter * painter){m_scene->drawScene(painter);}
 inline void FVMcore::battle::FVMBattleSceneManager::updateScene() 
 {
-    static int tick = 0;
-    if (tick++ % 3 == 0) {
-        // mousePosManager.update();
-        tick = 0;
-    } 
     m_scene->updateScene(); 
 }
 inline void FVMcore::battle::FVMBattleSceneManager::pauseScene()  {m_scene->pauseScene();  }

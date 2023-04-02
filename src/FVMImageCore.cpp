@@ -72,7 +72,7 @@ bool FVMctrl_core::imageSplicer::reset(const int& count, const std::string& firs
                     (firstFrame + std::to_string(i) + '.' + profix).c_str()
                 )
         ); 
-        if ((--_m_splicer.end())->isNull()) _Valid = false;
+        if (_m_splicer.back().isNull()) _Valid = false;
     } while(i++ < count);
     
     return _Valid;
@@ -94,8 +94,5 @@ void FVMctrl_core::imageSplicer::render(QPainter * painter, const QRect & rect, 
         if (_move) ++_currentFrame;
         if (_currentFrame == _end_frame)
             _currentFrame = _start_frame;
-    }
-    else {
-        // qDebug() << "ImageSplicer: INVALID IMAGE"; 
     }
 }
