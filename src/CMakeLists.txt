@@ -9,8 +9,8 @@ set(SOURCE_LIST
     FVMOptionGroup.cpp
     FVMCardContainer.cpp
 
-    DaintyTownScene.cpp
-    DaintyLandScene.cpp
+    FVMDaintyTown.cpp
+    FVMDaintyLand.cpp
     
     FVMAnimation.cpp
     FVMFoodPolicy.cpp

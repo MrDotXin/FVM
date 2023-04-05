@@ -23,7 +23,7 @@ class MainWidget : public QWidget
 
     public:
         void switchScene(scene_core::scene_base *);
-        void switchScene(int id);
+        bool switchScene(int id);
 
         scene_core::scene_base * currentScene() {return m_currentScene; }
     private:

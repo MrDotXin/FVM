@@ -1,6 +1,7 @@
 #include "MainWidget.h"
-#include "include/Ui/FVMGameScene.h"
-#include "include/Ui/FVMScenceCore.h"
+#include "include/Ui/scene/FVMScenceCore.h"
+#include "include/Ui/scene/FVMDaintyTown.h"
+#include "include/Ui/scene/FVMDaintyLand.h"
 #include <QtWidgets/QDialog>
 #include <QtGui/QPainter>
 
@@ -47,10 +48,16 @@ void MainWidget::timerEvent(QTimerEvent *)
 
 }
 
+/// @brief SwitchScene provide generalized callback to change the viewport of main widget. 
+/*! Scene can be divided into two catagories.  
+        1. ctrl scene   : which provide normal interactions and is static. 
+        2. battle scene : which is dynamic and has global timer to manipulate the flash speed.      
+*/ 
 void MainWidget::switchScene(scene_core::scene_base * scene)
 {
     static int timer_id = 0;
     if (scene->getSceneId() > 100) {
+    // new FVMBattleSceneManager to take charge of the battle scene to idealize special interaction requirements. 
         m_battleManager.setScene(dynamic_cast<scene_core::_FVMAbstructGameScene *>(scene));
         scene = &m_battleManager;
         m_opg->setHidden(true);
@@ -61,18 +68,14 @@ void MainWidget::switchScene(scene_core::scene_base * scene)
     m_scene_cache[m_currentScene->getSceneId()] = m_currentScene;
     m_currentScene = scene;
     m_currentScene->createScene();
-    //    m_currentScene->updateScene();
 }
 
-void MainWidget::switchScene(int id)
+bool MainWidget::switchScene(int id)
 {
-    auto scene_iter = m_scene_cache.find(id);
-    if (id == 0) {
-        switchScene(scene_iter == m_scene_cache.end() 
-            ? new scene_core::daintyTownScene(this) : scene_iter->second);
-    } else if (id == 1) {
-        switchScene(scene_iter == m_scene_cache.end() 
-            ? new scene_core::daintyLandScene(this) : scene_iter->second);
+    // If scene has been loaded with certain state.
+    if (m_scene_cache.count(id) > 0 ) {
+        switchScene(m_scene_cache[id]);
+        return true;
     }
+    return false;
 }
-

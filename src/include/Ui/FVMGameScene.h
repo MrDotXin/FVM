@@ -1,6 +1,6 @@
 #if ! defined(_FVMGAMESCENE_H_)
 #define _FVMGAMESCENE_H_
-#include "FVMScenceCore.h"
+#include "scene/FVMScenceCore.h"
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGraphicsScene>
 

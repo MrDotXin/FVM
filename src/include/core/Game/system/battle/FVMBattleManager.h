@@ -1,6 +1,6 @@
 #if ! defined(_FVMBATTLEMANAGER_H_)
 #define _FVMBATTLEMANAGER_H_
-#include "../../../../Ui/FVMScenceCore.h"
+#include "../../../../Ui/scene/FVMScenceCore.h"
 #include "../../../../Ui/ctrl/FVMBattleCardDemo.h"
 #include "../../../../Ui/FVMGameMap.h"
 #include "../FVMAbstructCardManager.h"
