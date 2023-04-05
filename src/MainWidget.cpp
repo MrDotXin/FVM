@@ -7,16 +7,14 @@
 
 
 MainWidget::MainWidget(QWidget * parent)
-    : QWidget(parent), m_opg( new FVMctrl_core::FVMOptionGroup(this))
+    : QWidget(parent), m_opg( new FVMctrl_core::FVMOptionGroup(this)), m_currentScene(nullptr)
 {
     setMouseTracking(true);
     setFixedSize(950, 600);
     setObjectName("FVM");
-    // this->setWindowFlag(Qt::FramelessWindowHint);
     m_currentScene = new scene_core::daintyTownScene(this);
     m_currentScene->createScene();
     m_currentScene->updateScene();
-    qDebug() << "Widget built";
 }
 
 MainWidget::~MainWidget()
@@ -45,19 +43,18 @@ void MainWidget::paintEvent(QPaintEvent * p)
 void MainWidget::timerEvent(QTimerEvent *)
 {
    m_currentScene->updateScene();
-
 }
 
 /// @brief SwitchScene provide generalized callback to change the viewport of main widget. 
 /*! Scene can be divided into two catagories.  
-        1. ctrl scene   : which provide normal interactions and is static. 
-        2. battle scene : which is dynamic and has global timer to manipulate the flash speed.      
+        1. Ctrl scene   : which provide normal interactions and is static. 
+        2. Battle scene : which is dynamic and has global timer to manipulate the flash speed.      
 */ 
 void MainWidget::switchScene(scene_core::scene_base * scene)
 {
     static int timer_id = 0;
     if (scene->getSceneId() > 100) {
-    // new FVMBattleSceneManager to take charge of the battle scene to idealize special interaction requirements. 
+    // New FVMBattleSceneManager to take charge of the battle scene to idealize special interaction requirements. 
         m_battleManager.setScene(dynamic_cast<scene_core::_FVMAbstructGameScene *>(scene));
         scene = &m_battleManager;
         m_opg->setHidden(true);

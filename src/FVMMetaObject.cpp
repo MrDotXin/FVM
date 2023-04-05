@@ -7,6 +7,8 @@
         VITAL
 */
 #define MAS(...) FVMcore::MouseObject::Animation_State {__VA_ARGS__}
+
+/// Fixed relative resource address 
 #define FOOD_ADDRESS(FoodName, statrum) "../resource/Food/"#FoodName"/"#statrum"/"
 
 #define FOOD_CARD_ADDRESS(FoodName, statrum) "../resource/Food/"#FoodName"/"#statrum"/card.png" 

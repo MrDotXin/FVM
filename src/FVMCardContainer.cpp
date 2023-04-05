@@ -18,11 +18,13 @@ void FVMctrl_core::FVMCardContainerView::createCardScene(int mode, int width)
 
     block_col = width / size.width();
     block_row = blocknums / block_col + (blocknums % block_col == 0 ? 0 : 1);
+    
     int __height = 0;
     int __initWidth = (width % size.width()) / 2;
     int __width = __initWidth;
 
-    for (int __r = 0; __r < block_row; __r++) {
+    // Create cards' selection UI
+    for (int __r = 0; __r < block_row; __r++) { 
         m_block.push_back({});
         __width = __initWidth;
         for (int __l = 0; __l < block_col; __l++) {

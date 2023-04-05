@@ -4,7 +4,6 @@
 #include "include/Ui/FVMGameScene.h"
 #include "include/Ui/FVMUi.h"
 #include <QtGui/QMouseEvent>
-#include <QtWidgets/QScrollArea>
 #include <list>
 #include <unordered_map>
 // display all the scene
@@ -27,14 +26,10 @@ class MainWidget : public QWidget
 
         scene_core::scene_base * currentScene() {return m_currentScene; }
     private:
-        std::list<QWidget *> m_general_widget_group; 
-        std::unordered_map<int, scene_core::scene_base *>  m_scene_cache;
-
-        scene_core::scene_base * m_currentScene = nullptr;
-        FVMcore::battle::FVMBattleSceneManager   m_battleManager;
-    private:
-        FVMctrl_core::FVMOptionGroup * m_opg;
-
+        std::unordered_map<int, scene_core::scene_base *>  m_scene_cache; ///< stone scenes having been loaded 
+        FVMcore::battle::FVMBattleSceneManager             m_battleManager;
+        scene_core::scene_base *                           m_currentScene;
+    private:        
         FVMctrl_core::FVMCardContainerView * m_view_frame;
-        QScrollArea * area;
+        FVMctrl_core::FVMOptionGroup *       m_opg;
 };

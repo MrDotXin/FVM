@@ -14,23 +14,14 @@ namespace scene_core {
                 public: 
                     _FVMAbstructGameScene() = default;
                     virtual ~_FVMAbstructGameScene() noexcept = default;
-                public:     
                 public :
-                // from scene_base
-                    virtual void createScene() override {};
-                    virtual void deleteScene() override {};
-                    virtual void updateScene() override {};
-                    virtual void pauseScene() override  {};
-                    virtual void drawScene(QPainter *) {};
-
                 // unique for game scene 
                     virtual QGraphicsScene * scene()         = 0;
-                    virtual void createGameMap(FVMPlainGameMap *) = 0;
-                    virtual int getBeginPoint_x()            = 0;
-                    virtual int getBeginPoint_y()            = 0; 
-                    virtual int getSceneWidth()              = 0;
-                    virtual int getSceneHeight()             = 0;
-                    
+                    virtual void createGameMap(FVMPlainGameMap *) = 0;  /// Create maps for each scenario
+                    virtual int getBeginPoint_x()            = 0;       /// Valid region beginning position
+                    virtual int getBeginPoint_y()            = 0;       /// Valid region beginning position
+                    virtual int getSceneWidth()              = 0;       /// Width  of valid region
+                    virtual int getSceneHeight()             = 0;       /// Height of valid region 
             };
 
             class Temple : public _FVMAbstructGameScene, public QGraphicsView
@@ -40,7 +31,7 @@ namespace scene_core {
                 const QPixmap scene_prospect   = QPixmap("../resource/daintyLand/level/temple/temple_prospect.png");
                 const int scene_begin_x    = 192;
                 const int scene_begin_y    = 110;
-                const int scene_card_begin_x = 81;
+                const int scene_card_begin_x = 81;      ///< except cats' region, where the block starts.
 
                 public :
                     Temple(MainWidget *);
@@ -66,9 +57,9 @@ namespace scene_core {
                     
                 private : 
                     QGraphicsScene * m_scene;
-                    MainWidget * m_mainwin;
-                    QRect _m_update_rect;
-                    bool isPaused = false;
+                    MainWidget *     m_mainwin;
+                    QRect            _m_update_rect;
+                    bool             isPaused = false;
                 public :
                     inline const QRect updateRect() {return _m_update_rect; }
             };  
